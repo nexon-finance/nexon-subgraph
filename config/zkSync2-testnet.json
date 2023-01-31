@@ -1,0 +1,11 @@
+{
+  "network": "zkSync2-testnet",
+  "nDAIAddress": "0xe457166F4c3D1E291b4BAE525644711a696F6339",
+  "nDAIStartBlock": 60559,
+  "nETHAddress": "0x09217d6a261e82B80242C9C8F21F7DD5B30E8bBc",
+  "nETHStartBlock": 60745,
+  "nWBTCAddress": "0x1b4085E919703d2Df7143F0F2605ea950934ae38",
+  "nWBTCStartBlock": 60969,
+  "nUSDCAddress": "0xb32589A842fCa59e66E97E795e557f249DE75E1a",
+  "nUSDCStartBlock": 60677
+}
