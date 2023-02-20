@@ -13,3 +13,9 @@ type Transaction @entity {
   timestamp: BigInt!
   block: BigInt!
 }
+
+type State @entity {
+  id: ID!
+  totalAddresses: BigInt!
+  totalTransactions: BigInt!
+}

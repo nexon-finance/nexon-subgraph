@@ -3,8 +3,8 @@ import {
   Borrow,
   Redeem,
   RepayBorrow
-} from '../generated/CErc20/CErc20';
-import { createUser } from './helpers';
+} from '../generated/nDAI/CErc20';
+import { addTransaction, createUser } from './helpers';
 import { Transaction } from '../generated/schema';
 
 export function handleMint(event: Mint): void {
@@ -23,6 +23,7 @@ export function handleMint(event: Mint): void {
     }
     transaction.save();
     createUser(event.params.minter);
+    addTransaction();
   }
 }
 
@@ -41,6 +42,7 @@ export function handleRedeem(event: Redeem): void {
       transaction.token = event.transaction.to.toHexString();
     }
     transaction.save();
+    addTransaction();
   }
 }
 
@@ -60,6 +62,7 @@ export function handleBorrow(event: Borrow): void {
     }
     transaction.save();
     createUser(event.params.borrower);
+    addTransaction();
   }
 }
 
@@ -78,5 +81,6 @@ export function handleRepayBorrow(event: RepayBorrow): void {
       transaction.token = event.transaction.to.toHexString();
     }
     transaction.save();
+    addTransaction();
   }
 }
