@@ -8,7 +8,7 @@ type Transaction @entity {
   id: ID!
   user: User!
   amount: BigInt!
-  token: String
+  token: Bytes
   action: String!
   timestamp: BigInt!
   block: BigInt!
@@ -18,4 +18,9 @@ type State @entity {
   id: ID!
   totalAddresses: BigInt!
   totalTransactions: BigInt!
+}
+
+type DailyUser @entity {
+  id: ID!
+  totalUsers: BigInt!
 }

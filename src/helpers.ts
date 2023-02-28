@@ -1,7 +1,7 @@
 import { BigInt, Bytes } from "@graphprotocol/graph-ts";
-import { State, User } from "../generated/schema";
+import { DailyUser, State, User } from "../generated/schema";
 
-export function createUser(address: Bytes): void {
+export function createUser(address: Bytes, timestamp: BigInt): void {
     let userAddress = address.toHexString();
 
     let user = User.load(userAddress);
@@ -18,6 +18,16 @@ export function createUser(address: Bytes): void {
         state.totalAddresses = state.totalAddresses
             .plus(BigInt.fromI32(1));
         state.save();
+
+        let date = getDate(timestamp);
+        let dailyUser = DailyUser.load(date);
+        if (!dailyUser) {
+            dailyUser = new DailyUser(date);
+            dailyUser.totalUsers = BigInt.fromI32(0);
+        }
+        dailyUser.totalUsers = dailyUser.totalUsers
+            .plus(BigInt.fromI32(1));
+        dailyUser.save();
     }
 }
 
@@ -36,4 +46,9 @@ function initalizeState(): State {
     state.totalAddresses = BigInt.fromI32(0);
     state.totalTransactions = BigInt.fromI32(0);
     return state;
+}
+
+function getDate(timestamp: BigInt): string {
+    let date = new Date(timestamp.times(BigInt.fromI32(1000)).toI64());
+    return date.toISOString().split('T')[0];
 }

@@ -18,11 +18,9 @@ export function handleMint(event: Mint): void {
     transaction.timestamp = event.block.timestamp;
     transaction.user = event.params.minter.toHexString();
     transaction.amount = event.params.mintAmount;
-    if (event.transaction.to) {
-      transaction.token = event.transaction.to.toHexString();
-    }
+    transaction.token = event.transaction.to;
     transaction.save();
-    createUser(event.params.minter);
+    createUser(event.params.minter, event.block.timestamp);
     addTransaction();
   }
 }
@@ -38,9 +36,7 @@ export function handleRedeem(event: Redeem): void {
     transaction.timestamp = event.block.timestamp;
     transaction.user = event.params.redeemer.toHexString();
     transaction.amount = event.params.redeemAmount;
-    if (event.transaction.to) {
-      transaction.token = event.transaction.to.toHexString();
-    }
+    transaction.token = event.transaction.to;
     transaction.save();
     addTransaction();
   }
@@ -57,11 +53,9 @@ export function handleBorrow(event: Borrow): void {
     transaction.timestamp = event.block.timestamp;
     transaction.user = event.params.borrower.toHexString();
     transaction.amount = event.params.borrowAmount;
-    if (event.transaction.to) {
-      transaction.token = event.transaction.to.toHexString();
-    }
+    transaction.token = event.transaction.to;
     transaction.save();
-    createUser(event.params.borrower);
+    createUser(event.params.borrower, event.block.timestamp);
     addTransaction();
   }
 }
@@ -77,9 +71,7 @@ export function handleRepayBorrow(event: RepayBorrow): void {
     transaction.timestamp = event.block.timestamp;
     transaction.user = event.params.borrower.toHexString();
     transaction.amount = event.params.repayAmount;
-    if (event.transaction.to) {
-      transaction.token = event.transaction.to.toHexString();
-    }
+    transaction.token = event.transaction.to;
     transaction.save();
     addTransaction();
   }
